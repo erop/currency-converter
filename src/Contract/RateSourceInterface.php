@@ -4,7 +4,12 @@
 namespace App\Contract;
 
 
+use App\Entity\ExchangeRate;
+
 interface RateSourceInterface
 {
-    public function getRates();
+    /**
+     * @return ExchangeRate[]
+     */
+    public function getRates(): array;
 }

@@ -5,6 +5,7 @@ namespace App\Service;
 
 
 use App\Contract\RateSourceInterface;
+use App\Entity\ExchangeRate;
 
 class EcbRateSource implements RateSourceInterface
 {
@@ -16,8 +17,11 @@ class EcbRateSource implements RateSourceInterface
     {
     }
 
-    public function getRates()
+    /**
+     * @return ExchangeRate[]
+     */
+    public function getRates(): array
     {
-        // TODO: Implement getRates() method.
+        return [];
     }
 }

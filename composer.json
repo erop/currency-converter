@@ -19,7 +19,8 @@
     },
     "require-dev": {
         "symfony/phpunit-bridge": "^5.0",
-        "symfony/profiler-pack": "^1.0"
+        "symfony/profiler-pack": "^1.0",
+        "vimeo/psalm": "^3.8"
     },
     "config": {
         "preferred-install": {

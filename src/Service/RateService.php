@@ -23,7 +23,7 @@ class RateService
     }
 
     /**
-     * @return ExchangeRate []
+     * @return ExchangeRate[]
      */
     public function getRates(): array
     {

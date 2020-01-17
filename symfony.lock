@@ -1,4 +1,10 @@
 {
+    "amphp/amp": {
+        "version": "v2.4.0"
+    },
+    "amphp/byte-stream": {
+        "version": "v1.7.1"
+    },
     "api-platform/api-pack": {
         "version": "v1.2.1"
     },
@@ -15,6 +21,9 @@
             "config/routes/api_platform.yaml",
             "src/Entity/.gitignore"
         ]
+    },
+    "composer/xdebug-handler": {
+        "version": "1.4.0"
     },
     "doctrine/annotations": {
         "version": "1.0",
@@ -92,6 +101,12 @@
     "doctrine/reflection": {
         "version": "v1.1.0"
     },
+    "felixfbecker/advanced-json-rpc": {
+        "version": "v3.0.4"
+    },
+    "felixfbecker/language-server-protocol": {
+        "version": "v1.4.0"
+    },
     "fig/link-util": {
         "version": "1.1.0"
     },
@@ -113,6 +128,9 @@
             "config/packages/nelmio_cors.yaml"
         ]
     },
+    "netresearch/jsonmapper": {
+        "version": "v1.6.0"
+    },
     "nikic/php-parser": {
         "version": "v4.3.0"
     },
@@ -121,6 +139,9 @@
     },
     "ocramius/proxy-manager": {
         "version": "2.2.3"
+    },
+    "openlss/lib-array2xml": {
+        "version": "1.0.0"
     },
     "php": {
         "version": "7.4"
@@ -151,6 +172,9 @@
     },
     "psr/log": {
         "version": "1.1.2"
+    },
+    "sebastian/diff": {
+        "version": "3.0.2"
     },
     "sensio/framework-extra-bundle": {
         "version": "5.2",
@@ -427,8 +451,17 @@
     "twig/twig": {
         "version": "v3.0.1"
     },
+    "vimeo/psalm": {
+        "version": "3.8.3"
+    },
     "webmozart/assert": {
         "version": "1.6.0"
+    },
+    "webmozart/glob": {
+        "version": "4.1.0"
+    },
+    "webmozart/path-util": {
+        "version": "2.3.0"
     },
     "willdurand/negotiation": {
         "version": "v2.3.1"

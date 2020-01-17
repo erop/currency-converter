@@ -15,6 +15,7 @@ class ExchangeRate implements Hashable
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @var int
      */
     private $id;
 
@@ -72,12 +73,12 @@ class ExchangeRate implements Hashable
         );
     }
 
-    public function getBaseCurrencyCode(): ?string
+    public function getBaseCurrencyCode(): string
     {
         return $this->baseCurrencyCode;
     }
 
-    public function getQuoteCurrencyCode(): ?string
+    public function getQuoteCurrencyCode(): string
     {
         return $this->quoteCurrencyCode;
     }

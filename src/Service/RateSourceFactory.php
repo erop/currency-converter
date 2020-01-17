@@ -5,6 +5,7 @@ namespace App\Service;
 
 
 use App\Contract\RateSourceInterface;
+use App\Exception\RateSourceNotFoundException;
 
 class RateSourceFactory
 {
@@ -30,6 +31,8 @@ class RateSourceFactory
                 return new EcbRateSource();
             case 'CBR':
                 return new CbrRateSource();
+            default:
+                throw new RateSourceNotFoundException('Could not instantiate rate source service');
         }
     }
 }
