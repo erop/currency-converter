@@ -7,6 +7,7 @@ namespace App\Service;
 use App\Contract\RateSourceInterface;
 use App\Exception\RateSourceNotFoundException;
 use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class RateSourceFactory
 {
@@ -25,7 +26,7 @@ class RateSourceFactory
      * @param string $rateSource
      * @param HttpClient $httpClient
      */
-    public function __construct(string $rateSource, HttpClient $httpClient)
+    public function __construct(string $rateSource, HttpClientInterface $httpClient)
     {
         $this->rateSource = $rateSource;
         $this->httpClient = $httpClient;
