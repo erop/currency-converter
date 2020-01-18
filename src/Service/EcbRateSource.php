@@ -4,19 +4,10 @@
 namespace App\Service;
 
 
-use App\Contract\RateSourceInterface;
 use App\Entity\ExchangeRate;
 
-class EcbRateSource implements RateSourceInterface
+class EcbRateSource extends AbstractRateSource
 {
-
-    /**
-     * EcbRateSource constructor.
-     */
-    public function __construct()
-    {
-    }
-
     /**
      * @return ExchangeRate[]
      */

@@ -4,12 +4,10 @@
 namespace App\Service;
 
 
-use App\Contract\RateSourceInterface;
 use App\Entity\ExchangeRate;
 
-class CbrRateSource implements RateSourceInterface
+class CbrRateSource extends AbstractRateSource
 {
-
     /**
      * @return ExchangeRate[]
      */
