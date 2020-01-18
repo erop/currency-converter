@@ -27,35 +27,35 @@ class ExchangeRate
     /**
      * @ORM\Column(type="string", length=3)
      */
-    private $baseCurrencyCode;
+    private $baseCurrency;
 
     /**
      * @ORM\Column(type="string", length=3)
      */
-    private $quoteCurrencyCode;
+    private $quoteCurrency;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="decimal", precision=12, scale=8)
      */
-    private $rate;
+    private $quote;
 
     /**
      * ExchangeRate constructor.
      * @param $date
      * @param $baseCurrencyCode
      * @param $quoteCurrencyCode
-     * @param $rate
+     * @param $quote
      */
     public function __construct(
         DateTimeImmutable $date,
         string $baseCurrencyCode,
         string $quoteCurrencyCode,
-        string $rate
+        string $quote
     ) {
         $this->date = $date;
-        $this->baseCurrencyCode = $baseCurrencyCode;
-        $this->quoteCurrencyCode = $quoteCurrencyCode;
-        $this->rate = $rate;
+        $this->baseCurrency = $baseCurrencyCode;
+        $this->quoteCurrency = $quoteCurrencyCode;
+        $this->quote = $quote;
     }
 
     public function getId(): int
@@ -63,14 +63,14 @@ class ExchangeRate
         return $this->id;
     }
 
-    public function getBaseCurrencyCode(): string
+    public function getBaseCurrency(): string
     {
-        return $this->baseCurrencyCode;
+        return $this->baseCurrency;
     }
 
-    public function getQuoteCurrencyCode(): string
+    public function getQuoteCurrency(): string
     {
-        return $this->quoteCurrencyCode;
+        return $this->quoteCurrency;
     }
 
     public function getTimestamp(): int
@@ -83,8 +83,8 @@ class ExchangeRate
         return $this->date;
     }
 
-    public function getRate(): string
+    public function getQuote(): ?string
     {
-        return $this->rate;
+        return $this->quote;
     }
 }
