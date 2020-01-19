@@ -16,7 +16,8 @@
         "symfony/maker-bundle": "^1.14",
         "symfony/messenger": "5.0.*",
         "symfony/orm-pack": "^1.0",
-        "symfony/yaml": "5.0.*"
+        "symfony/yaml": "5.0.*",
+        "ext-dom": "*"
     },
     "require-dev": {
         "symfony/phpunit-bridge": "^5.0",

@@ -28,7 +28,6 @@ class RateService
     public function getRates(): array
     {
         $source = $this->factory->getRateSource();
-
-        return [];
+        return $source->getRates();
     }
 }

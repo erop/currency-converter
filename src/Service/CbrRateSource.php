@@ -6,7 +6,7 @@ namespace App\Service;
 
 use App\Entity\ExchangeRate;
 
-class CbrRateSource extends AbstractRateSource
+final class CbrRateSource extends AbstractRateSource
 {
     /**
      * @return ExchangeRate[]
@@ -14,5 +14,15 @@ class CbrRateSource extends AbstractRateSource
     public function getRates(): array
     {
         return [];
+    }
+
+    public function getMethod(): string
+    {
+        return 'GET';
+    }
+
+    public function getUrl(): string
+    {
+        return 'https://www.cbr.ru/scripts/XML_daily.asp';
     }
 }

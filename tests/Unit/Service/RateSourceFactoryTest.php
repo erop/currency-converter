@@ -11,6 +11,7 @@ use App\Service\RateSourceFactory;
 use Generator;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class RateSourceFactoryTest extends TestCase
 {
@@ -48,6 +49,6 @@ class RateSourceFactoryTest extends TestCase
 
     protected function setUp()
     {
-        $this->httpClient = new HttpClient();
+        $this->httpClient = $this->createMock(HttpClientInterface::class);
     }
 }
