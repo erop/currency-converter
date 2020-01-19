@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Service;
-
 
 use App\Contract\RateSourceInterface;
 use App\Exception\RateSourceNotFoundException;
@@ -19,11 +17,8 @@ class RateSourceFactory
      */
     private $httpClient;
 
-
     /**
      * RateSourceFactory constructor.
-     * @param string $rateSource
-     * @param HttpClientInterface $httpClient
      */
     public function __construct(string $rateSource, HttpClientInterface $httpClient)
     {

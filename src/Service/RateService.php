@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Service;
-
 
 use App\Entity\ExchangeRate;
 
@@ -15,7 +13,6 @@ class RateService
 
     /**
      * RateService constructor.
-     * @param RateSourceFactory $factory
      */
     public function __construct(RateSourceFactory $factory)
     {
@@ -28,6 +25,7 @@ class RateService
     public function getRates(): array
     {
         $source = $this->factory->getRateSource();
+
         return $source->getRates();
     }
 }

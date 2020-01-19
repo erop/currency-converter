@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Contract;
-
 
 use App\Entity\ExchangeRate;
 

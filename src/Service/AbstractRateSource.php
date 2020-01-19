@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Service;
-
 
 use App\Contract\RateSourceInterface;
 use App\Entity\ExchangeRate;
@@ -31,6 +29,7 @@ abstract class AbstractRateSource implements RateSourceInterface
 
     /**
      * @return ExchangeRate[]
+     *
      * @throws Exception
      */
     public function getRates(): array
@@ -44,6 +43,7 @@ abstract class AbstractRateSource implements RateSourceInterface
         foreach ($quotes as $quote) {
             $rates[] = $this->createExchangeRate($date, $quote);
         }
+
         return $rates;
     }
 
@@ -65,5 +65,4 @@ abstract class AbstractRateSource implements RateSourceInterface
     abstract protected function getQuotes(DOMDocument $doc);
 
     abstract protected function createExchangeRate(DateTimeImmutable $date, DOMNode $node);
-
 }

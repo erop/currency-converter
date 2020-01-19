@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\MessageHandler\Command;
-
 
 use App\Exception\Domain\ExchangeRatesDuplicationException;
 use App\Message\Command\GetExchangeRates;
@@ -42,7 +40,7 @@ class GetExchangeRatesHandler implements MessageHandlerInterface
         $today = new DateTimeImmutable('today');
         $persistedRates = $this->repository->findBy(['date' => $today]);
 
-        if ( ! empty($persistedRates)) {
+        if (!empty($persistedRates)) {
             $message = sprintf('Exchange rates for %s already exist in database', $today->format('Y-m-d'));
             throw new ExchangeRatesDuplicationException($message);
         }

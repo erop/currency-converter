@@ -5,8 +5,6 @@ namespace App\Repository;
 use App\Entity\ExchangeRate;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 
 /**
  * @method ExchangeRate|null find($id, $lockMode = null, $lockVersion = null)

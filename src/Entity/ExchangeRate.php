@@ -14,6 +14,7 @@ class ExchangeRate
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     *
      * @var int
      * @psalm-suppress PropertyNotSetInConstructor
      */
@@ -41,6 +42,7 @@ class ExchangeRate
 
     /**
      * ExchangeRate constructor.
+     *
      * @param $date
      * @param $baseCurrencyCode
      * @param $quoteCurrencyCode
