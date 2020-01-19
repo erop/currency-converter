@@ -4,8 +4,10 @@
 namespace App\Exception;
 
 
+
 use RuntimeException;
 
-class ProcessXmlException extends XmlException
+class XmlException extends RuntimeException
 {
+
 }

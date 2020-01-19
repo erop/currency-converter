@@ -3,7 +3,9 @@
 build:
 	composer install
 
-test: phpunit psalm
+ok: phpunit psalm
+
+test: phpunit
 
 run:
 	symfony serve
