@@ -21,22 +21,14 @@ final class EcbRateSource extends AbstractRateSource
     public const BASE_CURRENCY = 'EUR';
     public const DEFAULT_NAMESPACE_URI = 'http://www.ecb.int/vocabulary/2002-08-01/eurofxref';
 
-    /**
-     * @return ExchangeRate[]
-     * @throws Exception
-     */
-    public function getRates(): array
+    public function getMethod(): string
     {
-        $xml = $this->getContent();
-        $doc = new DOMDocument();
-        $doc->loadXML($xml);
-        $date = $this->getDocumentDate($doc);
-        $quotes = $this->getQuotes($doc);
-        $rates = [];
-        foreach ($quotes as $quote) {
-            $rates[] = $this->createExchangeRate($date, $quote);
-        }
-        return $rates;
+        return 'GET';
+    }
+
+    public function getUrl(): string
+    {
+        return 'https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml';
     }
 
     /**
@@ -46,7 +38,7 @@ final class EcbRateSource extends AbstractRateSource
      * @throws Exception
      * @psalm-suppress MixedInferredReturnType
      */
-    private function getDocumentDate(DOMDocument $doc): ?DateTimeImmutable
+    protected function getDocumentDate(DOMDocument $doc): ?DateTimeImmutable
     {
         $xpath = $this->prepareXPath($doc, 'd');
         if (false === $nodeList = $xpath->query('//d:Cube/d:Cube')) {
@@ -55,7 +47,10 @@ final class EcbRateSource extends AbstractRateSource
         if (0 === $nodeList->count()) {
             throw new XmlSchemaModifiedException('ECB modified its XML file schema: Could not find node with date');
         }
-        return new DateTimeImmutable($nodeList->item(0)->attributes->getNamedItem('time')->nodeValue);
+        return DateTimeImmutable::createFromFormat(
+            'Y-m-d',
+            $nodeList->item(0)->attributes->getNamedItem('time')->nodeValue
+        );
     }
 
     /**
@@ -75,7 +70,7 @@ final class EcbRateSource extends AbstractRateSource
         return $xpath;
     }
 
-    private function getQuotes(DOMDocument $doc): \DOMNodeList
+    protected function getQuotes(DOMDocument $doc): \DOMNodeList
     {
         $xpath = $this->prepareXPath($doc, 'd');
         if (false === $quotes = $xpath->query('//d:Cube/d:Cube/d:Cube')) {
@@ -90,7 +85,7 @@ final class EcbRateSource extends AbstractRateSource
      *
      * @return ExchangeRate
      */
-    private function createExchangeRate(DateTimeImmutable $date, DOMNode $quote): ExchangeRate
+    protected function createExchangeRate(DateTimeImmutable $date, DOMNode $quote): ExchangeRate
     {
         if (null === $quoteCurrency = $this->getQuoteAttributeValue($quote, 'currency')) {
             throw new XmlSchemaModifiedException('Could not find quote currency');
@@ -122,15 +117,5 @@ final class EcbRateSource extends AbstractRateSource
             return $value;
         }
         return null;
-    }
-
-    public function getMethod(): string
-    {
-        return 'GET';
-    }
-
-    public function getUrl(): string
-    {
-        return 'https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml';
     }
 }
