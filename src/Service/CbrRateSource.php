@@ -50,19 +50,15 @@ final class CbrRateSource extends AbstractRateSource
     {
         $quoteCurrency = 'RUB';
         $xpath = new DOMXPath($node->ownerDocument);
-        $quote = bcdiv(1, $this->getNominal($node, $xpath), 8);
+        $quote = bcdiv('1', $this->getNominal($node, $xpath), 8);
         $baseCurrency = $xpath->query('CharCode', $node)->item(0)->nodeValue;
 
         return new ExchangeRate($date, $baseCurrency, $quoteCurrency, $quote);
     }
 
-    /**
-     * @param DOMNode $node
-     * @param DOMXPath $xpath
-     * @return string
-     */
     protected function getNominal(DOMNode $node, DOMXPath $xpath): string
     {
-        return $xpath->query('Nominal', $node)->item(0)->nodeValue;
+        $value = $xpath->query('Nominal', $node)->item(0)->nodeValue;
+        return str_replace(',', '.', $value);
     }
 }
