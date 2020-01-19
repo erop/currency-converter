@@ -53,7 +53,9 @@ final class EcbRateSource extends AbstractRateSource
     }
 
     /**
-     * @param $prefix
+     * @param DOMDocument $doc
+     * @param string $prefix
+     * @return DOMXPath
      */
     private function prepareXPath(DOMDocument $doc, string $prefix): DOMXPath
     {
