@@ -13,6 +13,7 @@ class RateService
 
     /**
      * RateService constructor.
+     * @param RateSourceFactory $factory
      */
     public function __construct(RateSourceFactory $factory)
     {

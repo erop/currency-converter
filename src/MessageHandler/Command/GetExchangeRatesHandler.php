@@ -2,11 +2,10 @@
 
 namespace App\MessageHandler\Command;
 
-use App\Exception\Domain\ExchangeRatesDuplicationException;
+use App\Entity\ExchangeRate;
 use App\Message\Command\GetExchangeRates;
 use App\Repository\ExchangeRateRepository;
 use App\Service\RateService;
-use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
@@ -37,14 +36,12 @@ class GetExchangeRatesHandler implements MessageHandlerInterface
 
     public function __invoke(GetExchangeRates $command)
     {
-        $today = new DateTimeImmutable('today');
-        $persistedRates = $this->repository->findBy(['date' => $today]);
-
-        if (!empty($persistedRates)) {
-            $message = sprintf('Exchange rates for %s already exist in database', $today->format('Y-m-d'));
-            throw new ExchangeRatesDuplicationException($message);
+        // remove all existing rates
+        foreach ($this->repository->findAll() as $persistedRate) {
+            $this->em->remove($persistedRate);
         }
 
+        // insert new ones
         foreach ($this->rateService->getRates() as $rate) {
             $this->em->persist($rate);
         }
