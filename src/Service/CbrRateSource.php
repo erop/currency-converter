@@ -12,6 +12,8 @@ use DOMXPath;
 
 final class CbrRateSource extends AbstractRateSource
 {
+    public const QUOTE_CURRENCY = 'RUB';
+
     public function getMethod(): string
     {
         return 'GET';
@@ -48,17 +50,17 @@ final class CbrRateSource extends AbstractRateSource
 
     protected function createExchangeRate(DateTimeImmutable $date, DOMNode $node): ExchangeRate
     {
-        $quoteCurrency = 'RUB';
         $xpath = new DOMXPath($node->ownerDocument);
-        $quote = bcdiv('1', $this->getNominal($node, $xpath), 8);
-        $baseCurrency = $xpath->query('CharCode', $node)->item(0)->nodeValue;
-
-        return new ExchangeRate($date, $baseCurrency, $quoteCurrency, $quote);
+        $baseCurrency = $this->getNodeValue($node, $xpath, 'CharCode');
+        $value = $this->getNodeValue($node, $xpath, 'Value');
+        $commaReplaced = str_replace(',', '.', $value);
+        $nominal = $this->getNodeValue($node, $xpath, 'Nominal');
+        $quote = bcdiv($commaReplaced, $nominal, 8);
+        return new ExchangeRate($date, $baseCurrency, self::QUOTE_CURRENCY, $quote);
     }
 
-    protected function getNominal(DOMNode $node, DOMXPath $xpath): string
+    protected function getNodeValue(DOMNode $rateNode, DOMXPath $xpath, $nodeName): string
     {
-        $value = $xpath->query('Nominal', $node)->item(0)->nodeValue;
-        return str_replace(',', '.', $value);
+        return $xpath->query($nodeName, $rateNode)->item(0)->nodeValue;
     }
 }
