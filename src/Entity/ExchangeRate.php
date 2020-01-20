@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ExchangeRateRepository")
+ * @ORM\Table(name="exchange_rates")
  */
 class ExchangeRate
 {
@@ -36,7 +37,7 @@ class ExchangeRate
     private $quoteCurrency;
 
     /**
-     * @ORM\Column(type="decimal", precision=12, scale=8)
+     * @ORM\Column(type="decimal", precision=16, scale=8)
      */
     private $quote;
 
