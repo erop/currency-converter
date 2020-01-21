@@ -65,14 +65,22 @@ class ExchangeController extends AbstractController
             throw new Exception((string)$requestErrors);
         }
 
-        $query = new GetCurrencyConverted(
+        $envelop = $this->messageBus->dispatch($this->createQuery($exchangeRequest));
+        /** @var HandledStamp $stamp */
+        $stamp = $envelop->last(HandledStamp::class);
+        return $this->json($stamp->getResult());
+    }
+
+    /**
+     * @param ExchangeRequest $exchangeRequest
+     * @return GetCurrencyConverted
+     */
+    protected function createQuery(ExchangeRequest $exchangeRequest): GetCurrencyConverted
+    {
+        return new GetCurrencyConverted(
             $exchangeRequest->getFromCurrency(),
             $exchangeRequest->getToCurrency(),
             $exchangeRequest->getFromAmount()
         );
-        $envelop = $this->messageBus->dispatch($query);
-        /** @var HandledStamp $stamp */
-        $stamp = $envelop->last(HandledStamp::class);
-        return $this->json($stamp->getResult());
     }
 }
