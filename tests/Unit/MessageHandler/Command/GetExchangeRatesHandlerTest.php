@@ -3,7 +3,7 @@
 namespace App\Tests\Unit\MessageHandler\Command;
 
 use App\Entity\ExchangeRate;
-use App\Message\Command\GetExchangeRates;
+use App\Message\Command\PopulateExchangeRates;
 use App\MessageHandler\Command\GetExchangeRatesHandler;
 use App\Repository\ExchangeRateRepository;
 use App\Service\RateService;
@@ -30,6 +30,6 @@ class GetExchangeRatesHandlerTest extends TestCase
             ->willReturn([]);
         $handler = new GetExchangeRatesHandler($rateService, $em, $repository);
         $this->assertInstanceOf(MessageHandlerInterface::class, $handler);
-        $handler(new GetExchangeRates());
+        $handler(new PopulateExchangeRates());
     }
 }

@@ -4,7 +4,7 @@
 namespace App\Service;
 
 
-use App\Dto\ExchangeRequest;
+use App\Message\Query\GetCurrencyConverted;
 use App\Dto\ExchangeResponse;
 use App\Repository\ExchangeRateRepository;
 use Symfony\Component\Intl\Currencies as SymfonyCurrencies;
@@ -25,7 +25,7 @@ class CurrencyConverter
         $this->repository = $repository;
     }
 
-    public function process(ExchangeRequest $request): ?ExchangeResponse
+    public function process(GetCurrencyConverted $request): ?ExchangeResponse
     {
         $fromCurrency = $request->getFromCurrency();
         $toCurrency = $request->getToCurrency();

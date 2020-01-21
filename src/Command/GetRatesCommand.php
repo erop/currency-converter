@@ -2,7 +2,7 @@
 
 namespace App\Command;
 
-use App\Message\Command\GetExchangeRates;
+use App\Message\Command\PopulateExchangeRates;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -36,7 +36,7 @@ class GetRatesCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln('Start getting rates...');
-        $this->messageBus->dispatch(new GetExchangeRates());
+        $this->messageBus->dispatch(new PopulateExchangeRates());
         $output->writeln('Rates retrieved and stored');
 
         return 0;

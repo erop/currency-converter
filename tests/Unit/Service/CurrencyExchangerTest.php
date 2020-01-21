@@ -2,7 +2,7 @@
 
 namespace App\Tests\Unit\Service;
 
-use App\Dto\ExchangeRequest;
+use App\Message\Query\GetCurrencyConverted;
 use App\Entity\ExchangeRate;
 use App\Repository\ExchangeRateRepository;
 use App\Service\CurrencyConverter;
@@ -12,7 +12,7 @@ class CurrencyExchangerTest extends TestCase
 {
     public function testConversionForExactExchangeRate(): void
     {
-        $request = new ExchangeRequest('EUR', 'USD', '123.45');
+        $request = new GetCurrencyConverted('EUR', 'USD', '123.45');
         $repository = $this->createMock(ExchangeRateRepository::class);
         $repository->expects($this->once())
             ->method('findOneBy')
@@ -25,7 +25,7 @@ class CurrencyExchangerTest extends TestCase
 
     public function testConversionForInvertedExchangeRate(): void
     {
-        $request = new ExchangeRequest('EUR', 'USD', '123.45');
+        $request = new GetCurrencyConverted('EUR', 'USD', '123.45');
         $repository = $this->createMock(ExchangeRateRepository::class);
         $repository->expects($this->at(0))
             ->method('findOneBy')

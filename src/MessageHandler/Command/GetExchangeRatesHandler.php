@@ -3,7 +3,7 @@
 namespace App\MessageHandler\Command;
 
 use App\Entity\ExchangeRate;
-use App\Message\Command\GetExchangeRates;
+use App\Message\Command\PopulateExchangeRates;
 use App\Repository\ExchangeRateRepository;
 use App\Service\RateService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -34,7 +34,7 @@ class GetExchangeRatesHandler implements MessageHandlerInterface
         $this->repository = $repository;
     }
 
-    public function __invoke(GetExchangeRates $command)
+    public function __invoke(PopulateExchangeRates $command)
     {
         // remove all existing rates
         foreach ($this->repository->findAll() as $persistedRate) {

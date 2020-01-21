@@ -1,13 +1,13 @@
 <?php
 
 
-namespace App\Dto;
+namespace App\Message\Query;
 
 
 use Symfony\Component\Serializer\Annotation\SerializedName;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class ExchangeRequest
+class GetCurrencyConverted
 {
     /**
      * @var string
@@ -28,8 +28,8 @@ class ExchangeRequest
     /**
      * @var string
      * @Assert\NotBlank()
-     * @Assert\Positive()
      * @SerializedName("from_amount")
+     * @Assert\Positive()
      */
     private $fromAmount;
 

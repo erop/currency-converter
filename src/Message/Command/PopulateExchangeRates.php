@@ -2,6 +2,6 @@
 
 namespace App\Message\Command;
 
-class GetExchangeRates
+class PopulateExchangeRates
 {
 }
