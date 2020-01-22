@@ -51,12 +51,12 @@ final class CbrRateSource extends AbstractRateSource
     protected function createExchangeRate(DateTimeImmutable $date, DOMNode $node): ExchangeRate
     {
         $xpath = new DOMXPath($node->ownerDocument);
-        $baseCurrency = $this->getNodeValue($node, $xpath, 'CharCode');
+        $quoteCurrency = $this->getNodeValue($node, $xpath, 'CharCode');
         $value = $this->getNodeValue($node, $xpath, 'Value');
         $commaReplaced = str_replace(',', '.', $value);
         $nominal = $this->getNodeValue($node, $xpath, 'Nominal');
-        $quote = bcdiv($commaReplaced, $nominal, 8);
-        return new ExchangeRate($date, $baseCurrency, self::QUOTE_CURRENCY, $quote);
+        $quote = bcdiv($nominal, $commaReplaced, 8);
+        return new ExchangeRate($date, self::QUOTE_CURRENCY, $quoteCurrency, $quote);
     }
 
     protected function getNodeValue(DOMNode $rateNode, DOMXPath $xpath, $nodeName): string
