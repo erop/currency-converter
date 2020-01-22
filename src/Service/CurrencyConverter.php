@@ -26,11 +26,11 @@ class CurrencyConverter
         $this->repository = $repository;
     }
 
-    public function process(GetCurrencyConverted $request): ?ExchangeResponse
+    public function process(GetCurrencyConverted $query): ?ExchangeResponse
     {
-        $fromCurrency = $request->getFromCurrency();
-        $toCurrency = $request->getToCurrency();
-        $fromAmount = $request->getFromAmount();
+        $fromCurrency = $query->getFromCurrency();
+        $toCurrency = $query->getToCurrency();
+        $fromAmount = $query->getFromAmount();
         $scale = SymfonyCurrencies::getFractionDigits($toCurrency);
 
         // try to use direct currency pair
@@ -44,6 +44,20 @@ class CurrencyConverter
         $rate = $this->repository->findOneBy(['baseCurrency' => $toCurrency, 'quoteCurrency' => $fromCurrency]);
         if ($rate) {
             $toAmount = $this->calculateInvertedConversion($fromAmount, $rate, $scale);
+            return new ExchangeResponse($fromCurrency, $toCurrency, $fromAmount, $toAmount);
+        }
+
+        // try to use adjacent currency pairs assuming they have the same base currency
+        $invertedRate = $this->repository->findOneBy(['quoteCurrency' => $fromCurrency]);
+        $directRate = $this->repository->findOneBy(['quoteCurrency' => $toCurrency]);
+        if (null !== $invertedRate
+            && null !== $directRate
+            && $invertedRate->getBaseCurrency() === $directRate->getBaseCurrency()
+        ) {
+            $invertedScale = SymfonyCurrencies::getFractionDigits($invertedRate->getBaseCurrency());
+            $directScale = SymfonyCurrencies::getFractionDigits($directRate->getQuoteCurrency());
+            $intermediateAmount = $this->calculateInvertedConversion($fromAmount, $invertedRate, $invertedScale);
+            $toAmount = $this->calculateDirectConversion($intermediateAmount, $directRate, $directScale);
             return new ExchangeResponse($fromCurrency, $toCurrency, $fromAmount, $toAmount);
         }
 
