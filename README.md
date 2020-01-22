@@ -18,3 +18,26 @@ https://www.cbr.ru/scripts/XML_daily.asp
 
 Задание необходимо выполнить на фрэймворке Symfony 4.2
 Постарайтесь как можно полнее показать ваши знания и умения проектирования и написания кода.
+
+### Перед запуском
+
+- установить DATABASE_URL в .env
+
+- проверить значение RATE_SOURCE в .env
+
+- установить зависимости `$ make build` 
+
+- запустить тесты `$ make test`
+
+- запустить приложение `$ make run`
+
+- выполнить `./bin/console app:get-rates`
+
+REST для конвертации доступно по `POST /exchange`, нужно отправить JSON-объект вида
+````json
+{
+    "from_currency": "KRW",
+    "to_currency": "JPY",
+    "from_amount": "100"
+}
+````
