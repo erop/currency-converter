@@ -1,17 +1,11 @@
-.PHONY: build test run phpunit psalm
+.PHONY: build test run
 
 build:
 	composer install
 
-ok: phpunit psalm
-
-test: phpunit
+test:
+	./bin/phpunit
 
 run:
 	symfony serve
 
-phpunit:
-	./bin/phpunit
-
-psalm:
-	./vendor/bin/psalm

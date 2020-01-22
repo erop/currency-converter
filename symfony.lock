@@ -1,13 +1,4 @@
 {
-    "amphp/amp": {
-        "version": "v2.4.0"
-    },
-    "amphp/byte-stream": {
-        "version": "v1.7.1"
-    },
-    "composer/xdebug-handler": {
-        "version": "1.4.0"
-    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -84,29 +75,17 @@
     "doctrine/reflection": {
         "version": "v1.1.0"
     },
-    "felixfbecker/advanced-json-rpc": {
-        "version": "v3.0.4"
-    },
-    "felixfbecker/language-server-protocol": {
-        "version": "v1.4.0"
-    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
     "moneyphp/money": {
         "version": "v3.3.0"
     },
-    "netresearch/jsonmapper": {
-        "version": "v1.6.0"
-    },
     "nikic/php-parser": {
         "version": "v4.3.0"
     },
     "ocramius/proxy-manager": {
         "version": "2.2.3"
-    },
-    "openlss/lib-array2xml": {
-        "version": "1.0.0"
     },
     "php": {
         "version": "7.3"
@@ -131,9 +110,6 @@
     },
     "psr/log": {
         "version": "1.1.2"
-    },
-    "sebastian/diff": {
-        "version": "3.0.2"
     },
     "sensio/framework-extra-bundle": {
         "version": "5.2",
@@ -392,17 +368,8 @@
     "twig/twig": {
         "version": "v3.0.1"
     },
-    "vimeo/psalm": {
-        "version": "3.8.3"
-    },
     "webmozart/assert": {
         "version": "1.6.0"
-    },
-    "webmozart/glob": {
-        "version": "4.1.0"
-    },
-    "webmozart/path-util": {
-        "version": "2.3.0"
     },
     "zendframework/zend-code": {
         "version": "3.4.1"

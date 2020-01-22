@@ -61,14 +61,6 @@ class CurrencyConverter
             return new ExchangeResponse($fromCurrency, $toCurrency, $fromAmount, $toAmount);
         }
 
-        // todo add custom validator to avoid that $fromCurrency will be equal to $toCurrency
-
-        // todo make RUB base currency for CBR rate source
-
-        // todo add third logic for calculating simple (only two edges) adjacent pairs
-
-        // todo use serious graph algorithm to fuck this shit in a supa-pupa way
-
         return null;
     }
 
