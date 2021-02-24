@@ -1,39 +1,36 @@
-### Тестовое задание
+### Task
 
-1. Создайте репозитарий (на ГитХабе, например, или БитБакете), в который будете складывать код.
+Use https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml and https://www.cbr.ru/scripts/XML_daily.asp as data sources for acquiring currency rates for given date with console command.
 
-Используя экспорт из двух источников реализуйте сбор данных о курсах валют на текущую дату посредством консольной команды
-https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml
-https://www.cbr.ru/scripts/XML_daily.asp
+All the data should be stored in DB using Doctrine.
 
-Все данные нужно записать в БД используя ORM Doctrine
+Add configuration for switching data source (ECB or CBR). Implement currency conversion for currencies which are not the base currency for given bank.
 
-Сделать конфигурацию в проекте для переключения источника данных (ECB или CBR). Уметь рассчитывать сумму для обмена между валютами, которые не являются базовыми валютами используемых центробанков (к примеру, USD-GBP).
+Implement REST service for currency conversion.
 
-Написать REST сервис где можно указать сумму и связку валют и получить в ответ сконвертированую сумму
+Cover code with unit and integration tests.
 
-Написать интеграционные и юнит тесты
+The code should be built with Symfony 4.2.
 
-Пришлите ссылку на репозитарий и укажите общее время, затраченное на задание.
+### Before running the app
 
-Задание необходимо выполнить на фрэймворке Symfony 4.2
-Постарайтесь как можно полнее показать ваши знания и умения проектирования и написания кода.
+- make sure you have `Symfony CLI`, `Docker` and `Docker Compose` installed
+  
+- launch MySQL server with `docker-compose up -d --build`
 
-### Перед запуском
+- install packages with `symfony composer install`
 
-- установить DATABASE_URL в .env
+- apply migration with `symfony console doctrine:migrations:migrate`
 
-- проверить значение RATE_SOURCE в .env
+- check RATE_SOURCE in .env file: it should be either ECB or CBR
+  
+- execute `symfony console app:get-rates` to populate rates
 
-- установить зависимости `$ make build` 
+- launch tests with `symfony php bin/phpunit` if you need to
 
-- запустить тесты `$ make test`
+- launch app with `symfony serve`, it should accept requests at https://127.0.0.1:8000
 
-- запустить приложение `$ make run`
-
-- выполнить `./bin/console app:get-rates`
-
-REST для конвертации доступно по `POST /exchange`, нужно отправить JSON-объект вида
+REST API will be available at `POST https://127.0.0.1:8000/exchange`, you should send body similar to:
 ````json
 {
     "from_currency": "KRW",

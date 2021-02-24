@@ -65,9 +65,9 @@ class CurrencyConverter
     }
 
     /**
-     * @param string $fromAmount
+     * @param string       $fromAmount
      * @param ExchangeRate $rate
-     * @param int $scale
+     * @param int          $scale
      * @return string
      */
     protected function calculateDirectConversion(
@@ -77,25 +77,31 @@ class CurrencyConverter
     ): string {
         return number_format(
             round(
-                bcmul($fromAmount, $rate->getQuote(), $scale + 1), $scale
+                bcmul($fromAmount, $rate->getQuote(), $scale + 1),
+                $scale
             ),
-            $scale
+            $scale,
+            '.',
+            ''
         );
     }
 
     /**
-     * @param string $fromAmount
+     * @param string       $fromAmount
      * @param ExchangeRate $rate
-     * @param int $scale
+     * @param int          $scale
      * @return string
      */
     protected function calculateInvertedConversion(string $fromAmount, ExchangeRate $rate, int $scale): string
     {
         return number_format(
             round(
-                bcdiv($fromAmount, $rate->getQuote(), $scale + 1), $scale
+                bcdiv($fromAmount, $rate->getQuote(), $scale + 1),
+                $scale
             ),
-            $scale
+            $scale,
+            '.',
+            ''
         );
     }
 }

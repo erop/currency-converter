@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+    database:
+        image: mysql:5
+        environment:
+            MYSQL_ROOT_PASSWORD: main
+            MYSQL_DATABASE: currency_converter
+            MYSQL_USER: main
+            MYSQL_PASSWORD: main
+        ports: [3306]
