@@ -1,32 +1,39 @@
-### Task
+### Тестовое задание
 
-Use https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml and https://www.cbr.ru/scripts/XML_daily.asp as data sources for acquiring currency rates for given date with console command.
+1. Создайте репозитарий (на ГитХабе, например, или БитБакете), в который будете складывать код.
 
-All the data should be stored in DB using Doctrine.
+Используя экспорт из двух источников реализуйте сбор данных о курсах валют на текущую дату посредством консольной команды
+https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml
+https://www.cbr.ru/scripts/XML_daily.asp
 
-Add configuration for switching data source (ECB or CBR). Implement currency conversion for currencies which are not the base currency for given bank.
+Все данные нужно записать в БД используя ORM Doctrine
 
-Implement REST service for currency conversion.
+Сделать конфигурацию в проекте для переключения источника данных (ECB или CBR). Уметь рассчитывать сумму для обмена между валютами, которые не являются базовыми валютами используемых центробанков (к примеру, USD-GBP).
 
-Cover code with unit and integration tests.
+Написать REST сервис где можно указать сумму и связку валют и получить в ответ сконвертированую сумму
 
-The code should be built with Symfony 4.2.
+Написать интеграционные и юнит тесты
 
-### Before running the app
+Пришлите ссылку на репозитарий и укажите общее время, затраченное на задание.
 
-- set DATABASE_URL in .env
+Задание необходимо выполнить на фрэймворке Symfony 4.2
+Постарайтесь как можно полнее показать ваши знания и умения проектирования и написания кода.
 
-- check RATE_SOURCE в .env
+### Перед запуском
 
-- install dependencies `make build` 
+- установить DATABASE_URL в .env
 
-- launch tests `make test`
+- проверить значение RATE_SOURCE в .env
 
-- launch app `make run`
+- установить зависимости `$ make build` 
 
-- execute `php ./bin/console app:get-rates` to populate rates
+- запустить тесты `$ make test`
 
-REST API will be available at `POST /exchange`, you should send body similar to:
+- запустить приложение `$ make run`
+
+- выполнить `./bin/console app:get-rates`
+
+REST для конвертации доступно по `POST /exchange`, нужно отправить JSON-объект вида
 ````json
 {
     "from_currency": "KRW",

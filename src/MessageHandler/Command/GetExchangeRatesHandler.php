@@ -2,6 +2,7 @@
 
 namespace App\MessageHandler\Command;
 
+use App\Entity\ExchangeRate;
 use App\Message\Command\PopulateExchangeRates;
 use App\Repository\ExchangeRateRepository;
 use App\Service\RateService;
